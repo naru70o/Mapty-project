@@ -7,6 +7,8 @@ const inputDistance = document.querySelector('.form__input--distance');
 const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
+const deleteworkout = document.querySelector('.delete');
+const deleteAllworkouts = document.querySelector('.trash');
 
 let map, mapEvent;
 
@@ -82,10 +84,16 @@ class App {
   constructor() {
     this._getPosition();
     this._getLocalStorage();
+    this._deleteWorkout();
 
     containerWorkouts.addEventListener('click', this._moveToPopup.bind(this));
     inputType.addEventListener('change', this._toggleElevationField);
     form.addEventListener('submit', this._newWorkout.bind(this));
+    deleteAllworkouts.addEventListener('click', this._deleteAllworkouts);
+    deleteAllworkouts.addEventListener('click', this._deleteAllworkouts);
+    document
+      .querySelector('.delete')
+      .addEventListener('click', this._deleteWorkout.bind(this));
   }
 
   _getPosition() {
@@ -218,7 +226,7 @@ class App {
     // workout.click();
 
     // toggle input
-    this._toggleElevationFeild();
+    this._toggleElevationField();
 
     // set local storage to all workouts
     this._setLocalStorage();
@@ -246,7 +254,9 @@ class App {
     let html = `<li class="workout workout--${workout.type}" data-id="${
       workout.id
     }">
-          <h2 class="workout__title">${workout.description}</h2>
+          <div class="workout__title"><h2>${workout.description}</h2>
+          <h2 class="delete" data-id="${workout.id}">X</h2>
+          </div>
           <div class="workout__details">
             <span class="workout__icon">${
               workout.type === 'running' ? '🏃‍♂️' : '🚴'
@@ -308,30 +318,35 @@ class App {
     });
   }
 
-  //
-  _setLocalStorage() {
-    localStorage.setItem('workouts', JSON.stringify(this.#workouts));
+  _deleteAllworkouts(e) {
+    localStorage.removeItem('workouts');
+    location.reload();
+  }
+
+  _deleteWorkout(e) {
+    // const buuf = this.#workouts.id;
+    // localStorage.removeItem(buuf);
+    console.log(e);
   }
 
   //
+  _setLocalStorage() {
+    localStorage.setItem('workouts', JSON.stringify(this.#workouts));
+    console.log();
+  }
+
   _getLocalStorage() {
     const data = JSON.parse(localStorage.getItem('workouts'));
-    console.log(data);
 
     if (!data) return;
     this.#workouts = data;
 
-    this.#workouts.forEach(work => {
+    console.log(data);
+    data.forEach(work => {
       this._renderWorkout(work);
     });
-  }
-
-  _reset() {
-    localStorage.removeItem('workouts');
-    location.reload();
   }
 }
 
 const app = new App();
 console.log(app);
-// app._getPosition();

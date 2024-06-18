@@ -55,6 +55,37 @@ a:visited {
   margin-bottom: 4rem;
 }
 
+.trash {
+  height: 2.8rem;
+  width: auto;
+  display: flex;
+  align-self: flex-end;
+  opacity: 0.5;
+  /* align-self: ; */
+}
+
+/* 
+deleteAllworkouts.addEventListener('click', this._deleteAllworkouts);
+    document
+      .querySelector('.delete')
+      .addEventListener('click', this._deleteWorkout.bind(this)); */
+
+.trash:hover {
+  opacity: 1;
+  transition: 1s;
+  cursor: pointer;
+}
+
+.delete {
+  font-style: bold;
+  opacity: 0.5;
+}
+
+.delete:hover {
+  opacity: 1;
+  transition: 1s;
+}
+
 .workouts {
   list-style: none;
   height: 77vh;
@@ -88,6 +119,13 @@ a:visited {
   font-size: 1.7rem;
   font-weight: 600;
   grid-column: 1 / -1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+h2 {
+  font-size: 1.7rem;
 }
 
 .workout__details {
