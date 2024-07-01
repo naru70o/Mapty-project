@@ -318,6 +318,71 @@ class App {
     });
   }
 
+  /*
+_newWorkout(e) {
+    e.preventDefault();
+
+    // check if data is valid
+    // helper functions
+    const validInputs = (...inputs) =>
+      inputs.every(inp => Number.isFinite(inp));
+    const allPositive = (...inputs) => inputs.every(inp => inp > 0);
+
+    // get data from form
+    const type = inputType.value;
+    const distance = +inputDistance.value;
+    const duration = +inputDuration.value;
+    const { lat, lng } = this.#mapEvent.latlng;
+    let workout;
+
+    // if workout running, create running object
+
+    if (type === 'running') {
+      const cadence = +inputCadence.value;
+      // deleteAllworkouts.style.display = 'flex';
+      // if we did this at the outside it gonna be
+      // also to check the elevation, only one can't be defined at same time
+      // the cadence and the elevation
+      if (
+        // !Number.isFinite(distance) ||
+        // !Number.isFinite(duration) ||
+        // !Number.isFinite(cadence)
+        validInputs(distance, duration, cadence) ||
+        allPositive(distance, duration, cadence)
+      ) {
+        deleteAllworkouts.style.display = 'flex';
+        workout = new Running([lat, lng], distance, duration, cadence);
+        // add new object to workout array
+        this.#workouts.push(workout);
+        console.log(workout);
+        return;
+      } else {
+        return alert('inputs has to be a possitive number');
+      }
+    }
+
+    // if workout cycling, create cycling object
+
+    if (type === 'cycling') {
+      const elevation = +inputElevation.value;
+      // deleteAllworkouts.style.display = 'flex';
+      if (
+        validInputs(distance, duration, elevation) ||
+        allPositive(distance, duration)
+      ) {
+        workout = new Cycling([lat, lng], distance, duration, elevation);
+        deleteAllworkouts.style.display = 'flex';
+        // add new object to workout array
+        this.#workouts.push(workout);
+        console.log(workout);
+        return;
+      } else {
+        return alert('inputs has to be a possitive number');
+      }
+    }
+
+*/
+
   _deleteAllworkouts(e) {
     localStorage.removeItem('workouts');
     location.reload();
